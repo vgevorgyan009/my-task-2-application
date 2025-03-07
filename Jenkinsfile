@@ -7,7 +7,7 @@ pipeline {
     DOCKER_REPO_SERVER = "891376912861.dkr.ecr.eu-central-1.amazonaws.com"
     DOCKER_REPO = "${DOCKER_REPO_SERVER}/java-maven-app"
     MANIFEST_REPO = "git@github.com:vgevorgyan009/my-task-2-infrastructure.git"
-    MANIFEST_PATH = "k8s-manifests/test-deployment-1.yaml"
+    MANIFEST_PATH = "my-task-2-infrastructure/k8s-manifests/test-deployment-1.yaml"
   }
   stages {
     stage("Read and Increment Version") {      

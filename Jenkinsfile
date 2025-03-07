@@ -50,6 +50,25 @@ pipeline {
             }
         }
     }
-
+    stage('Update Kubernetes Manifest') {
+        steps {
+            script {
+                echo "Updating Kubernetes manifest..."
+                withCredentials([sshUserPrivateKey(credentialsId: 'k8s-manifests-repo-creds', keyFileVariable: 'SSH_KEY')]) {
+                    sh """
+                    rm -rf k8s-manifests
+                    GIT_SSH_COMMAND="ssh -i $SSH_KEY -o StrictHostKeyChecking=no" git clone ${MANIFEST_REPO}
+                    sed -i 's|image: ${DOCKER_REPO}:.*|image: ${DOCKER_REPO}:${env.IMAGE_NAME}|' ${MANIFEST_PATH}
+                    cd k8s-manifests
+                    git config user.email "jenkins@hotmail.com"
+                    git config user.name "Jenkins"
+                    git add ${MANIFEST_PATH}
+                    git commit -m "Update image version to ${env.IMAGE_NAME}"
+                    GIT_SSH_COMMAND="ssh -i $SSH_KEY -o StrictHostKeyChecking=no" git push origin main
+                    """
+                }
+            }
+        }
+    }
    }
 }

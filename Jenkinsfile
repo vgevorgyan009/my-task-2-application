@@ -59,7 +59,7 @@ pipeline {
                     rm -rf my-task-2-infrastructure
                     GIT_SSH_COMMAND="ssh -i $SSH_KEY -o StrictHostKeyChecking=no" git clone ${MANIFEST_REPO}
                     sed -i 's|image: ${DOCKER_REPO}:.*|image: ${DOCKER_REPO}:${env.IMAGE_NAME}|' ${MANIFEST_PATH}
-                    cd k8s-manifests
+                    cd my-task-2-infrastructure/k8s-manifests
                     git config user.email "jenkins@hotmail.com"
                     git config user.name "Jenkins"
                     git add ${MANIFEST_PATH}

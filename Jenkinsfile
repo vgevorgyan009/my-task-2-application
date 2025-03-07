@@ -24,7 +24,7 @@ pipeline {
                     sh 'git config --global user.name "Jenkins"'
                     sh "git remote set-url origin https://${USER}:${PASS}@github.com/vgevorgyan009/my-task-2-application.git"
                     sh 'git add version.txt'
-                    sh 'git commit -m "Bump version to ${env.IMAGE_NAME}"'
+                    sh 'git commit -m "Bump version to new version"'
                     sh 'git push origin main'
             }
           }

@@ -62,7 +62,7 @@ pipeline {
                     cd my-task-2-infrastructure/k8s-manifests
                     git config user.email "jenkins@hotmail.com"
                     git config user.name "Jenkins"
-                    git add ${MANIFEST_PATH}
+                    git add test-deployment-1.yaml
                     git commit -m "Update image version to ${env.IMAGE_NAME}"
                     GIT_SSH_COMMAND="ssh -i $SSH_KEY -o StrictHostKeyChecking=no" git push origin main
                     """

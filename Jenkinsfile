@@ -10,6 +10,14 @@ pipeline {
     MANIFEST_PATH = "my-task-2-infrastructure/k8s-manifests/test-deployment-1.yaml"
   }
   stages {
+    stage("build app") {      
+        steps {
+            script {
+              echo "building the application..."
+              sh 'mvn clean package'
+          }
+      }
+    }
     stage("Read and Increment Version") {      
         steps {
             script {
@@ -29,14 +37,6 @@ pipeline {
             }
           }
         }
-    }
-    stage("build app") {      
-        steps {
-            script {
-              echo "building the application..."
-              sh 'mvn clean package'
-          }
-      }
     }
     stage('build image and push to private repo') {
         steps {
